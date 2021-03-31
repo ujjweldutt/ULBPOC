@@ -17,7 +17,7 @@ class WmsSearch extends Wms
     public function rules()
     {
         return [
-            [['id', 'user_id', 'ulb_id', 'ward_id', 'scheme_id', 'component_id', 'financial_year_id'], 'integer'],
+            [['id', 'user_id', 'ulb_id',  'scheme_id', 'component_id', 'financial_year_id'], 'integer'],
             [['work_code_number', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type', 'announcement_no', 'announcement_date', 'site_plan_file', 'cross_section_file', 'l_section_file', 'google_map_file', 'city_map_file', 'is_active', 'is_revised', 'remarks', 'created_on', 'updated_on'], 'safe'],
         ];
     }
@@ -61,7 +61,7 @@ class WmsSearch extends Wms
             'id' => $this->id,
             'user_id' => $this->user_id,
             'ulb_id' => $this->ulb_id,
-            'ward_id' => $this->ward_id,
+            //'ward_id' => $this->ward_id,
             'scheme_id' => $this->scheme_id,
             'component_id' => $this->component_id,
             'financial_year_id' => $this->financial_year_id,

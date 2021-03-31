@@ -19,7 +19,7 @@ class WmsWorkItemsSearch extends WmsWorkItems
         return [
             [['id', 'wms_id', 'item_id', 'quantity', 'rate_type_id'], 'integer'],
             [['description', 'remarks', 'unit', 'status', 'created_on', 'updated_on'], 'safe'],
-            [['number1', 'number2', 'number3', 'length', 'breadth', 'height', 'total_rate', 'total_amount'], 'number'],
+            [['number1','length', 'breadth', 'height', 'total_rate', 'total_amount'], 'number'],
         ];
     }
 
@@ -63,8 +63,6 @@ class WmsWorkItemsSearch extends WmsWorkItems
             'wms_id' => $this->wms_id,
             'item_id' => $this->item_id,
             'number1' => $this->number1,
-            'number2' => $this->number2,
-            'number3' => $this->number3,
             'length' => $this->length,
             'breadth' => $this->breadth,
             'height' => $this->height,

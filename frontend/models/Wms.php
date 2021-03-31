@@ -11,7 +11,7 @@ use Yii;
  * @property string $work_code_number
  * @property int $user_id
  * @property int $ulb_id
- * @property int $ward_id
+ * @property int $ward
  * @property int $scheme_id
  * @property int $component_id
  * @property int $financial_year_id
@@ -57,16 +57,16 @@ class Wms extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['work_code_number',  'ulb_id', 'ward_id', 'scheme_id', 'component_id', 'financial_year_id', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type', 'announcement_no', 'announcement_date'], 'required'],
-            [['user_id', 'ulb_id', 'ward_id', 'scheme_id', 'component_id', 'financial_year_id'], 'integer'],
-            [['announcement_date', 'created_on', 'updated_on'], 'safe'],
+            [['work_code_number',  'ulb_id', 'scheme_id', 'component_id', 'financial_year_id', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type'], 'required'],
+            [['user_id', 'ulb_id', 'scheme_id', 'component_id', 'financial_year_id'], 'integer'],
+            [['created_on', 'updated_on'], 'safe'],
             [['is_active', 'is_revised'], 'string'],
             [['work_code_number', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type', 'announcement_no', 'site_plan_file', 'cross_section_file', 'l_section_file', 'google_map_file', 'city_map_file', 'remarks'], 'string', 'max' => 255],
             [['ulb_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstUlb::className(), 'targetAttribute' => ['ulb_id' => 'id']],
             [['scheme_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstScheme::className(), 'targetAttribute' => ['scheme_id' => 'id']],
             [['component_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstComponent::className(), 'targetAttribute' => ['component_id' => 'id']],
-            [['financial_year_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstFinancialYear::className(), 'targetAttribute' => ['financial_year_id' => 'id']],
-            [['ward_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstWard::className(), 'targetAttribute' => ['ward_id' => 'id']],
+            // [['financial_year_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstFinancialYear::className(), 'targetAttribute' => ['financial_year_id' => 'id']],
+            // [['ward'], 'exist', 'skipOnError' => true, 'targetClass' => MstWard::className(), 'targetAttribute' => ['ward' => 'id']],
         ];
     }
 
@@ -80,17 +80,18 @@ class Wms extends \yii\db\ActiveRecord
             'work_code_number' => 'Work Code',
             'user_id' => 'User ID',
             'ulb_id' => 'MC Name',
-            'ward_id' => 'Ward No',
+            'ward' => 'Ward No',
             'scheme_id' => 'Scheme',
             'component_id' => 'Component Scheme',
             'financial_year_id' => 'Financial Year',
-            'work_name' => 'Name of Work',
+            'work_name' => 'Project Name',
             'work_type' => 'Type of Work',
             'work_sub_type' => 'Sub Type of Work',
-            'work_scope' => 'Scope of Work',
-            'announcement_type' => 'Type of Announcement',
+            'work_scope' => 'Scope of  (In Months)',
+            'announcement_type' => 'Type of Identification',
             'announcement_no' => 'Announcement No',
             'announcement_date' => 'Announcement Date',
+            'announcement_desc'=> 'Identification Description',
             'site_plan_file' => 'Site Plan',
             'cross_section_file' => 'Cross Section',
             'l_section_file' => 'L Section',
@@ -151,7 +152,7 @@ class Wms extends \yii\db\ActiveRecord
      */
     public function getWard()
     {
-        return $this->hasOne(MstWard::className(), ['id' => 'ward_id']);
+        return $this->hasOne(MstWard::className(), ['id' => 'ward']);
     }
 
     /**

@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel frontend\models\WmsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Wms';
+$this->title = 'Work';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wms-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Wms', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Work', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'work_code_number',
 			'work_name',            
             'user_id',

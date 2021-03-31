@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'wmsmodel' => $wmsmodel,
         'searchModel' => $searchModel,
         'dataProvider' => $dataProvider,
+        'dataWmsWork' => $dataWmsWork,
     ]) ?>
 
 </div>

@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Wms */
 
-$this->title = 'Create Wms';
-$this->params['breadcrumbs'][] = ['label' => 'Wms', 'url' => ['index']];
+$this->title = 'Create Work';
+$this->params['breadcrumbs'][] = ['label' => 'Work', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wms-create">
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+       
     ]) ?>
 
 </div>

@@ -9,10 +9,15 @@ use frontend\models\MstComponent;
 use frontend\models\MstItems;
 use frontend\models\MstUlb;
 use frontend\models\MstWard;
+use frontend\models\WorkType;
+use frontend\models\SubTypeWork;
+use frontend\models\MstAnnouncement;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Wms */
 /* @var $form yii\widgets\ActiveForm */
+
+//echo "<pre>"; print_r(MstWard::find()->where(['is_active'=>'Y'])->all()); die;
 ?>
 <style type="text/css">
    form div.required label.control-label:after {
@@ -52,8 +57,8 @@ use frontend\models\MstWard;
     ?>
     </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'ward_id')->dropDownList(
-         ArrayHelper::map(MstWard::find()->where(['is_active'=>'Y'])->all(), 'id', 'ward_number'),['prompt' => '-- Select Ward No --']) ?>
+            <?= $form->field($model, 'ward')->dropDownList(
+         ArrayHelper::map(MstWard::find()->where(['is_active'=>'Y'])->all(), 'ward_number', 'ward_number'),[ 'multiple'=>'multiple']) ?>  
              
          </div>
          <div class="col-md-4">
@@ -62,11 +67,16 @@ use frontend\models\MstWard;
     </div>
     <div class="row">
         <div class="col-md-4">
-        <?= $form->field($model, 'work_type')->textInput(['maxlength' => true]) ?>
-
+        <?= $form->field($model,'work_type')->dropDownList(
+         ArrayHelper::map(WorkType::find()->where(['is_active'=>'Y'])->all(), 'id', 'work_name'),['prompt' => '-- Select Work Type --'])
+        ?>
+        
         </div>
         <div class="col-md-4">
-                <?= $form->field($model, 'work_sub_type')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'work_sub_type')->dropDownList(
+                ArrayHelper::map(SubTypeWork::find()->where(['is_active'=>'Y'])->all(), 'id', 'sub_type_work'),['prompt' => '-- Select Sub Work Type --'])
+                ?>
+              
          </div>
 
          <div class="col-md-4">
@@ -96,8 +106,11 @@ use frontend\models\MstWard;
 
     <div class="row">
         <div class="col-md-4">
+        <?= $form->field($model, 'announcement_type')->dropDownList(
+                ArrayHelper::map(MstAnnouncement::find()->where(['is_active'=>'Y'])->all(), 'id', 'announcement_type'),['prompt' => '-- Type of Identification --'])
+                ?>
         
-         <?= $form->field($model, 'announcement_type')->textInput(['maxlength' => true]) ?>
+         <?php // $form->field($model, 'announcement_type')->textInput(['maxlength' => true]) ?>
 
         </div>
         <div class="col-md-4">
@@ -123,10 +136,11 @@ use frontend\models\MstWard;
     </div>
     <div class="row">
         <div class="col-md-4">
-         <?php echo $form->field($model, 'google_map_file')->fileInput(["class"=>"form-control","accept"=>"image/x-png,image/gif,image/pdf","onchange"=>"uploadCheck('epassapplication-other_file')"]) ?>
+        <?php echo $form->field($model, 'city_map_file')->fileInput(["class"=>"form-control","accept"=>"image/x-png,image/gif,image/pdf","onchange"=>"uploadCheck('epassapplication-other_file')"]) ?>
         </div>
         <div class="col-md-4">
-            <?php echo $form->field($model, 'city_map_file')->fileInput(["class"=>"form-control","accept"=>"image/x-png,image/gif,image/pdf","onchange"=>"uploadCheck('epassapplication-other_file')"]) ?>
+        <?php //echo $form->field($model, 'google_map_file')->fileInput(["class"=>"form-control","accept"=>"image/x-png,image/gif,image/pdf","onchange"=>"uploadCheck('epassapplication-other_file')"]) ?>
+           
         </div>
 
          

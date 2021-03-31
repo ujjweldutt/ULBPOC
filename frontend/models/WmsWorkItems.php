@@ -49,7 +49,7 @@ class WmsWorkItems extends \yii\db\ActiveRecord
         return [
             [['wms_id', 'item_id', 'length', 'breadth', 'height', 'unit', 'quantity', 'rate_type_id'], 'required'],
             [['wms_id', 'item_id', 'quantity', 'rate_type_id'], 'integer'],
-            [['number1', 'number2', 'number3', 'length', 'breadth', 'height', 'total_rate', 'total_amount'], 'number'],
+            [['number1','length', 'breadth', 'height', 'total_rate', 'total_amount'], 'number'],
             [['status'], 'string'],
             [['created_on', 'updated_on'], 'safe'],
             [['description', 'remarks'], 'string'],
@@ -68,12 +68,10 @@ class WmsWorkItems extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'wms_id' => 'Wms ID',
-            'item_id' => 'Item ID',
+            'item_id' => 'Item Type',
             'description' => 'Description',
             'remarks' => 'Remarks',
-            'number1' => 'Number1',
-            'number2' => 'Number2',
-            'number3' => 'Number3',
+            'number1' => 'Number',
             'length' => 'Length',
             'breadth' => 'Breadth',
             'height' => 'Height',
@@ -116,5 +114,11 @@ class WmsWorkItems extends \yii\db\ActiveRecord
     public function getItem()
     {
         return $this->hasOne(MstItems::className(), ['id' => 'item_id']);
+    }
+
+
+    public function getRate()
+    {
+        return $this->hasOne(MstRateType::className(), ['id' => 'rate_type_id']);
     }
 }
