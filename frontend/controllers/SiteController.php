@@ -91,7 +91,7 @@ class SiteController extends Controller
         $this->layout = 'auth';
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+         return $this->redirect(['wms/index']);
         } else {
             $model->password = '';
 

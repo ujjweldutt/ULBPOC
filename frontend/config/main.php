@@ -53,7 +53,13 @@ return [
                   ],
               ],
         ],
-        
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=poc_ulb',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ],
         // 'urlManager' => [
         //     'enablePrettyUrl' => true,
         //     'showScriptName' => false,
