@@ -19,19 +19,23 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode('ULB') ?></title>
+    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
+<div class="wrap h-100 d-flex flex-column">
     <?php echo $this->render('_header'); ?>
    
-    <div class="content-wrapper p-4 " style="margin-left:300px;">
+    <main class="d-flex">
+        <div class="content-wrapper p-4">
             <?= $content ?>  
         </div>
     
+    </main>
 
+</div>
 
 
 <?php $this->endBody() ?>
