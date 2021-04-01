@@ -61,7 +61,7 @@ class Wms extends \yii\db\ActiveRecord
             [['user_id', 'ulb_id', 'scheme_id', 'component_id', 'financial_year_id'], 'integer'],
             [['created_on', 'updated_on'], 'safe'],
             [['is_active', 'is_revised'], 'string'],
-            [['work_code_number', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type', 'announcement_no', 'site_plan_file', 'cross_section_file', 'l_section_file', 'google_map_file', 'city_map_file', 'remarks'], 'string', 'max' => 255],
+            [['work_code_number', 'work_name', 'work_type', 'work_sub_type', 'work_scope', 'announcement_type', 'announcement_no', 'site_plan_file', 'cross_section_file', 'l_section_file', 'google_map_file', 'city_map_file', 'remarks','announcement_desc'], 'string', 'max' => 255],
             [['ulb_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstUlb::className(), 'targetAttribute' => ['ulb_id' => 'id']],
             [['scheme_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstScheme::className(), 'targetAttribute' => ['scheme_id' => 'id']],
             [['component_id'], 'exist', 'skipOnError' => true, 'targetClass' => MstComponent::className(), 'targetAttribute' => ['component_id' => 'id']],

@@ -113,13 +113,21 @@ use frontend\models\MstAnnouncement;
          <?php // $form->field($model, 'announcement_type')->textInput(['maxlength' => true]) ?>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 announcement">
              <?= $form->field($model, 'announcement_no')->textInput(['maxlength' => true]) ?>
          </div>
 
-         <div class="col-md-4">
+         <div class="col-md-4 announcement">
             <?= $form->field($model, 'announcement_date')->textInput() ?>
          </div>
+
+       
+        <div class="col-md-8 announcementdesc"  style="display:none;">
+            <?= $form->field($model, 'announcement_desc')->textInput() ?>
+        </div>
+        
+
+         
     </div>
 
     <div class="row">
@@ -167,4 +175,42 @@ function uploadCheck(id){
           upl.value = "";
       }
    }
+   $( document ).ready(function() {
+    $( "#wms-announcement_type" ).change(function() {
+        var announcement_type=$(this).val();
+        if(announcement_type==1){
+            $("#wms-announcement_no").prop('required',true);
+            $("#wms-announcement_date").prop('required',true);
+            $(".announcement").css("display", "block");
+            $(".announcementdesc").css("display", "none");
+            $(".field-wms-announcement_no").addClass("required");
+            $(".field-wms-announcement_date").addClass("required");
+            
+
+        }else if(announcement_type==2){
+
+            $("#wms-announcement_no").prop('required',false);
+            $("#wms-announcement_date").prop('required',false);
+            $(".announcement").css("display", "block");
+            $(".announcementdesc").css("display", "none");
+            $(".field-wms-announcement_no").removeClass("required");
+            $(".field-wms-announcement_date").removeClass("required");
+            
+           
+        
+        }else if(announcement_type==3){
+
+            $("#wms-announcement_no").prop('required',false);
+            $("#wms-announcement_date").prop('required',false);
+            $(".announcement").css("display", "none");
+            $(".announcementdesc").css("display", "block");
+            $("#wms-announcement_desc").attr("required", "true"); 
+            $(".field-wms-announcement_desc").addClass("required");
+            
+        
+        }
+
+    });
+
+   });
 </script>
