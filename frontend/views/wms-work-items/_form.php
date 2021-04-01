@@ -139,7 +139,7 @@ use yii\widgets\Pjax;
     </table>
 
     
-    <button class="btn btn-primary" style="margin-left:10px;margin-right:10px;margin-bottom:50px" type="button" id="insert-more" onclick="addItems()">Add Item</button>&nbsp;
+    <button class="btn btn-info" style="margin-left:10px;margin-right:10px;margin-bottom:50px" type="button" id="insert-more" onclick="addItems()">Add Item</button>&nbsp;
     <button class="btn btn-danger"  style="margin-left:10px;margin-right:10px;margin-bottom:50px" type="button" id="delete-row">Deduct Item</button>
 
 </div>
@@ -246,7 +246,7 @@ use yii\widgets\Pjax;
      
       </div>
       <div class="modal-footer">
-      <button class="btn btn-primary" name="wmsitem_delete" >Delete</button>
+      <button class="btn btn-info" name="wmsitem_delete" >Delete</button>
      </div>
      </form> 
     </div>
@@ -311,7 +311,7 @@ use yii\widgets\Pjax;
 
                 </tbody>
         </table>
-            <button class="btn btn-primary" name="wmsitem_update" >Update</button>
+            <button class="btn btn-info" name="wmsitem_update" >Update</button>
       </form> 
       </div>
       <div class="modal-footer">
@@ -339,7 +339,7 @@ use yii\widgets\Pjax;
      
       </div>
       <div class="modal-footer">
-      <button class="btn btn-primary" name="wmsitem_delete" >Delete</button>
+      <button class="btn btn-info" name="wmsitem_delete" >Delete</button>
      </div>
      </form> 
     </div>

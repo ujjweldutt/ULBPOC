@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\WmsWorkItems */
 
-$this->title = 'Create Wms Work Items';
-$this->params['breadcrumbs'][] = ['label' => 'Wms Work Items', 'url' => ['index']];
+$this->title = 'Work Estimate';
+$this->params['breadcrumbs'][] = ['label' => 'Work Estimate', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wms-work-items-create">
