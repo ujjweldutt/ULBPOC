@@ -45,7 +45,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -89,8 +89,10 @@ class SiteController extends Controller
             return $this->goHome();
         }
         //$this->layout = 'auth';
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+          
          return $this->redirect(['wms/index']);
         } else {
             $model->password = '';
@@ -107,7 +109,7 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionLogout()
-    {
+    {   
         Yii::$app->user->logout();
 
         return $this->goHome();

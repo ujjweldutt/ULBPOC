@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use frontend\models\UserRoles;
 
 /**
  * User model
@@ -155,6 +156,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+    public function getRoleId(){
+        return @UserRoles::find()->where(["user_id"=>Yii::$app->user->identity->id,"is_active"=>'1'])->one()->role_id;
+      
     }
 
     /**

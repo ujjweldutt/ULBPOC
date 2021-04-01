@@ -16,6 +16,10 @@ return [
             'csrfParam' => '_csrf-frontend',
             'cookieValidationKey' => 'n3VCui4l6uK8mKn6WH91ZT0RPdkxH3p5',
         ],
+        
+        'utility' => [
+            'class'=> 'frontend\components\Utility',
+      ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -24,6 +28,7 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
+            'class'=> 'yii\Web\Session',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

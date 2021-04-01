@@ -5,13 +5,14 @@
 
 
 use yii\helpers\Html;
- 
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +28,7 @@ AppAsset::register($this);
     </style>
 </head>
 <?php $this->beginBody() ?>
+<?php   if(!Yii::$app->user->isGuest){ ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
     <a class="navbar-brand" href="#">
         <img src="<?= Yii::$app->view->theme->baseUrl ?>/images/uk_MCD_Logo.png" alt="LOGO">
@@ -49,7 +51,7 @@ AppAsset::register($this);
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Logout</a>
+                <a class="dropdown-item" href="<?=Url::to(['site/logout'])?>" >Logout</a>
             </div>
         </li>
         <li class="nav-item">
@@ -71,6 +73,7 @@ AppAsset::register($this);
                     </div>
                 </form>
                 <div class="nav mt-5">
+                <?php if(Yii::$app->utility->isAdmin()){?>
                     <a class="nav-link current" href="<?= Url::toRoute('/budget/index'); ?>">
                         <div class="sb-nav-link-icon">
                             <img src="<?= Yii::$app->view->theme->baseUrl ?>/images/ic_PropertyTax_hl.svg" alt="#" class="beforeimage">
@@ -78,6 +81,10 @@ AppAsset::register($this);
                         </div>
                         Budget
                     </a>
+               
+
+
+               
                     <a class="nav-link" href="<?= Url::toRoute('/budget-proposal/index'); ?>">
                         <div class="sb-nav-link-icon">
                             <img src="<?= Yii::$app->view->theme->baseUrl ?>/images/ic_BuildingPlanApproval.svg" alt="#" class="beforeimage">
@@ -116,7 +123,7 @@ AppAsset::register($this);
                         List of Estimate
                     </a>
 
-
+                   
                     <a class="nav-link" href="<?= Url::toRoute('/vendor-registration/create'); ?>">
                         <div class="sb-nav-link-icon">
                             <img src="<?= Yii::$app->view->theme->baseUrl ?>/images/ic_TradeLicence.svg" alt="#" class="beforeimage">
@@ -145,20 +152,22 @@ AppAsset::register($this);
                         </div>
                         Work and Vendor Rate Detail
                     </a>
-
+                    <?php }else{?>
+                <?php }?>
                 </div>
             </div>
         </nav>
     </div>
+    <?php }?>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap h-100 d-flex flex-column">
+<?php   if(Yii::$app->user->isGuest){ ?>
+<div class="content-wrapper col-md-12">
     <?php echo $this->render('_header'); ?>
    
-    <main class="d-flex">
-    <?php echo $this->render('_sidebar'); ?>
-        <div class="content-wrapper p-4">
+  
+    
+    <div class="content-wrapper col-md-12" style="margin-left:350px;">  
             <div class="row">
                 <div class="col-md-12">
                   <?= Alert::widget() ?>
@@ -166,10 +175,23 @@ AppAsset::register($this);
             </div>
             <?= $content ?>  
         </div>
-    
-    </main>
+  
 
 </div>
+<?php }else{?> 
+
+    <div class="content-wrapper col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <?= Alert::widget() ?>
+            </div>
+        </div>
+
+        <?= $content ?> 
+
+    </div>
+
+<?php }?>
 
 
 <?php $this->endBody() ?>

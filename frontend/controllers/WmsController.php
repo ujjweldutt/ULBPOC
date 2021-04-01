@@ -39,6 +39,7 @@ class WmsController extends Controller
      */
     public function actionIndex()
     {
+       
         $searchModel = new WmsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
