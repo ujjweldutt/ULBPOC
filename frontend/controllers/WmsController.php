@@ -243,8 +243,6 @@ class WmsController extends Controller
 
     function actionAddItems(){
         $request = Yii::$app->request;
-        // $createTable = 'CREATE TEMPORARY TABLE IF NOT EXISTS addItems(`wms_id` INT, `item_id` INT ,`description` text,`remarks` varchar(200),`number1` decimal(10,2), `length` decimal(10,2),`breadth` decimal(10,2),`height` decimal(10,2),`unit` varchar(100),`quantity` int(11),`rate_type_id` int(11),`total_rate` decimal(18,2) default null,`total_amount` decimal(18,2) default null);';
-        // Yii::$app->db->createCommand($createTable)->execute();
         $sqlList = '';
         $wmsid = $request->post('wms_id');
         $item_id = $request->post('item_id');
@@ -295,6 +293,7 @@ class WmsController extends Controller
                     $html.='<td>'.$items['item_name'].'</td>';
                     $html.='<input type="hidden" name="estimate[item][itemid][]" value="'.$items['item_id'].'" />';
                     $html.='<input type="hidden" name="estimate[item][wms_id][]" value="'.$items['wms_id'].'" />';
+                    $html.='<input type="hidden" name="estimate[item][items_added][]" value="'.$items['id'].'" />';
                     $html.='<td>'.$items['description'].'</td>';
                     $html.='<input type="hidden" name="estimate[item][descriptionIT][]"  value="'.$items['description'].'"/>';
                     $html.='<td>'.$items['remarks'].'</td>';

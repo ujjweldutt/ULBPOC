@@ -181,8 +181,8 @@ use yii\widgets\Pjax;
                        <td><?=$val->height?></td>
                        <td><?=$val->unit?></td>
                        <td><?=$val->quantity?></td>
-                       <td><a class="btn btn-warning modelblock1"  data-id="<?=$val->wms_id?>" href="#"  id="SModal<?=$val->wms_id?>" data-toggle="modal" data-target="#SModal">Edit</a>&nbsp;
-                       <a class="btn btn-danger modelblockdelete"  data-id="<?=$val->wms_id?>" href="#"   data-toggle="modal" data-target="#DModal">Delete</a>
+                       <td><a class="btn btn-warning modelblock1"  data-id="<?=$val->id?>" href="#"  id="SModal<?=$val->id?>" data-toggle="modal" data-target="#SModal">Edit</a>&nbsp;
+                       <a class="btn btn-danger modelblockdelete"  data-id="<?=$val->id?>" href="#"   data-toggle="modal" data-target="#DModal">Delete</a>
                       
                        </td>
                     </tr>
@@ -239,7 +239,7 @@ use yii\widgets\Pjax;
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="<?= Url::toRoute(['wms/update-estimate-details'])?>" >
+      <form method="POST" action="<?= Url::toRoute(['wms-work-items/update-estimate-details'])?>" >
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
             <h3>Are You sure want to delete this ?</h3>
             <input type="hidden" id="wms_itemid" name="wms_item_id"   /> 
@@ -332,7 +332,7 @@ use yii\widgets\Pjax;
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="<?= Url::toRoute(['wms/update-estimate-details'])?>" >
+      <form method="POST" action="<?= Url::toRoute(['wms-work-items/update-estimate-details'])?>" >
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
             <h3>Are You sure want to delete this ?</h3>
             <input type="hidden" id="wms_itemid" name="wms_item_id"   /> 
@@ -507,7 +507,7 @@ function getitem(id)
 
 
 function addItems(){
-
+    var items_added = $("#wmsID").val();
     var wmsid = $("#wmsID").val();
     var itmeslist = $("#itmeslist").val();
     var description = $("#wmsworkitems-description").val();
@@ -526,6 +526,7 @@ function addItems(){
             url: "<?= Url::toRoute('/wms/add-items') ?>",
             type: "POST",
             data: { 
+                items_added: items_added,
                 wms_id: wmsid,
                 item_id: itmeslist,
                 description: description,

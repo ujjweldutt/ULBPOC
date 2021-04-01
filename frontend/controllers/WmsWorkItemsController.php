@@ -68,7 +68,7 @@ class WmsWorkItemsController extends Controller
     public function actionCreate()
     {   
         $request = Yii::$app->request;
-
+       
         $id = $request->get('id');
         $wmsmodel = [];
         if(!empty($id)){
@@ -77,11 +77,13 @@ class WmsWorkItemsController extends Controller
         $model = new WmsWorkItems();
         if (!empty(Yii::$app->request->post())) {
             $loop = Yii::$app->request->post('estimate')['item']['itemid'];
+            echo "<pre>"; print_r(Yii::$app->request->post('estimate'));
             if(!empty($loop)){
                 $flag = false;
                 $bulkInsertArray = array();
                 for($i=0; $i<count($loop); $i++) {
                     $bulkInsertArray[]=[
+                        
                         'wms_id'=> Yii::$app->request->post('estimate')['item']['wms_id'][$i],
                         'item_id'=>Yii::$app->request->post('estimate')['item']['itemid'][$i],
                         'description'=>Yii::$app->request->post('estimate')['item']['descriptionIT'][$i],
@@ -96,7 +98,9 @@ class WmsWorkItemsController extends Controller
                         'total_rate'=>50,
                         'total_amount'=>50
                     ];
+                }
 
+                
                     if(count($bulkInsertArray)>0){
                         $columnNameArray=['wms_id','item_id','description','remarks','number1','length','breadth','height','unit','quantity','rate_type_id','total_rate','total_amount'];
                         $insertCount = Yii::$app->db->createCommand()
@@ -106,48 +110,21 @@ class WmsWorkItemsController extends Controller
                                        ->execute();
                         if($insertCount>0){
                             Yii::$app->session->setFlash("success","Work Item ID created Successfully.");
-
-                            //Yii::$app->db->createCommand($TuncatTable)->execute());
-                            
                              $TuncatTable = "DELETE FROM additems where wms_id=".Yii::$app->request->post('estimate')['item']['wms_id'][0];
-
                              Yii::$app->db->createCommand($TuncatTable)->execute();
-                             
                             return $this->redirect(['wms/estimate-details',
                              'id' => Yii::$app->request->post('estimate')['item']['wms_id'][0]]);
                         }else{
                             Yii::$app->session->setFlash("errors","Something went wrong.");
                         }
+                    }else{
+                        Yii::$app->session->setFlash("errors","NO data to insert.");
                     }
-                    
-                    
-                }
                 
 
             }
         }
 
-       
-
-        // if (!empty(Yii::$app->request->post())) {
-        //   if($model->load(Yii::$app->request->post())){
-        //         $model->status= "1";
-        //         $model->rate_type_id = 1;
-        //         if($model->save() !=false){
-        //             Yii::$app->session->setFlash("success","Work Item ID created Successfully. Work Item ID is: ".$model->id );
-        //         }else{
-        //             echo "Data not saved";
-        //         }
-        //     }else{
-        //      $err="";
-        //      foreach ($model->geterrors() as $key => $errors) {
-        //          foreach ($errors as $key => $error) {
-        //              $err.="<li>".$error."</li>";
-        //          }
-        //      }
-        //      Yii::$app->session->setFlash("error",$err);
-        //     }
-        // }
         $searchModel = new WmsWorkItemsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
        
@@ -246,7 +223,8 @@ class WmsWorkItemsController extends Controller
 
     public function actionEditEstimateDetails($id)
     {
-        $dataWmsWork = WmsWorkItems::find()->where(["id"=>$id])->one();
+       
+        $dataWmsWork = Additems::find()->where(["id"=>$id])->one();
         return   json_encode(['id'=>$dataWmsWork->id,
                       'item_name'=>$dataWmsWork->item->item_name,
                       'item_no'=>$dataWmsWork->item->item_no,
@@ -268,7 +246,7 @@ class WmsWorkItemsController extends Controller
         {
             if(isset($_POST) && isset($_POST['wmsitem_update'])  ){
                 $id=$_POST['wms_item_id'];
-                $dataWmsWork = WmsWorkItems::find()->where(["id"=>$id])->one();
+                $dataWmsWork = Additems::find()->where(["id"=>$id])->one();
                 $wms_id=$dataWmsWork->wms_id;
               
                 $dataWmsWork->description = $_POST['description'];
@@ -290,7 +268,7 @@ class WmsWorkItemsController extends Controller
             if(isset($_POST) && isset($_POST['wmsitem_delete'])  ){
                
                 $id=$_POST['wms_item_id'];
-                $dataWmsWork = WmsWorkItems::find()->where(["id"=>$id])->one();
+                $dataWmsWork = Additems::find()->where(["id"=>$id])->one();
                 $wms_id=$dataWmsWork->wms_id;
                 $dataWmsWork->delete();
                 return $this->redirect(['wms-work-items/create', 'id' => $wms_id]);
